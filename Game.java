@@ -2,7 +2,7 @@ import java.util.Comparator;
 import java.util.Iterator;
 import java.util.Scanner;
 
-public class Game extends Turno {
+public class Game extends GameTurn {
 	private ASCIIArt art = new ASCIIArt();
 
 	public Game() {
