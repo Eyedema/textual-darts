@@ -60,7 +60,9 @@ public class GameTurn {
 				} else if(!redo){
 					validShot(p, shot);
 					t = new Turn(shot, p);
-					System.out.println("\n" + p.getName() + " e' a " + p.getPoints() + " punti.\n"); 
+					System.out.println("\n");
+					System.out.println(p.getName() + " e' a " + p.getPoints() + " punti.\n"); 
+					System.out.println("\n");
 				}
 			} if(redo){
 				System.out.println("Tiro numero "+(currentTurn)+" annullato! "+p.getName()+" e' tornato a "+p.getPoints()+" punti.");
