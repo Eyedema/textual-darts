@@ -15,7 +15,7 @@ public class Game extends GameTurn {
 			gioca(giocatori.get(turno));
 			passaTurno();
 			summarize();
-		}
+		} 
 	}
 	
 

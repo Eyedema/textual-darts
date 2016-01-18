@@ -1,18 +1,20 @@
 
 public class Turn {
-	private int id, firstShot, secondShot, thirdShot;
+	private int points;
+	private Player p;
 
-	public Turn(int idTurn) {
-		id = idTurn;
+	public Turn(int points, Player p){
+		this.points = points;
+		this.p = p;
 	}
 
-	public void shot(int shot, int value) {
-		if (shot == 1)
-			firstShot = value;
-		if (shot == 2)
-			secondShot = value;
-		if (shot == 3)
-			thirdShot = value;
+	public int getPoints(){
+		return points;
+	}
+	
+	public Player getPlayer(){
+		return p;
 	}
 	
 }
+ 

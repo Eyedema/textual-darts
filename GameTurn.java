@@ -3,15 +3,14 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
-public class GameTurn{
-
-	private static int idTurn;
+public class GameTurn {
+	
 	protected int numGioc;
 	protected int puntiTotali;
 	protected List<Player> giocatori = new ArrayList<Player>();
-	private int currentPlayer = 0;
 	private final int maxShots = 3;
 	protected int turno = 0;
+	private Turn t;
 
 	public GameTurn() {
 		super();
@@ -30,17 +29,25 @@ public class GameTurn{
 		System.out.println("E' il turno di " + p.getName() + ", sei a " + p.getPoints() + " punti.");
 		int tmpShot = p.getPoints();
 		int currentTurn = 1;
+		boolean redo = false;
 		while (currentTurn <= maxShots) {
 			System.out.println("Lancio numero " + currentTurn + ":");
 			int shot = -1;
 			while (shot == -1) {
 				try {
 					String s = scanner.nextLine();
-					shot = Integer.parseInt(s);
+					if (s.equals("--r") && currentTurn > 1) {
+						p.setPoints(t.getPoints()+p.getPoints());
+						currentTurn--;
+						redo = true;
+						break;
+					} else {
+						shot = Integer.parseInt(s);
+					}
 				} catch (NumberFormatException nfe) {
 				}
 			}
-			if (!checkShot(shot)) {
+			if (!checkShot(shot) && !redo) {
 				System.out.println("\nTiro non valido!");
 				currentTurn--;
 			} else if (p.getPoints() - shot == 0) {
@@ -50,12 +57,18 @@ public class GameTurn{
 				if (p.getPoints() - shot < 0) {
 					p.setPoints(tmpShot);
 					currentTurn = maxShots;
-				} else {
+				} else if(!redo){
 					validShot(p, shot);
-					System.out.println("\n"+p.getName() + " e' a " + p.getPoints() + " punti.");
+					t = new Turn(shot, p);
+					System.out.println("\n" + p.getName() + " e' a " + p.getPoints() + " punti.\n"); 
 				}
+			} if(redo){
+				System.out.println("Tiro numero "+(currentTurn)+" annullato! "+p.getName()+" e' tornato a "+p.getPoints()+" punti.");
+				redo = false;
+			} else {
+				currentTurn++;
 			}
-			currentTurn++;
+			
 		}
 	}
 
@@ -72,7 +85,7 @@ public class GameTurn{
 		}
 		return false;
 	}
-	
+
 	public boolean checkWin() {
 		Iterator<Player> it = giocatori.iterator();
 		while (it.hasNext()) {
@@ -86,15 +99,13 @@ public class GameTurn{
 		}
 		return false;
 	}
-	
 
-	private void media(){
+	private void media() {
 		System.out.println("La media dei giocatori e' stata:\n");
 		Iterator<Player> it2 = giocatori.iterator();
 		while (it2.hasNext()) {
 			Player current2 = it2.next();
-			System.out.println(
-					 current2.getName() + ": " + current2.getMedia());
+			System.out.println(current2.getName() + ": " + current2.getMedia());
 		}
 	}
 
