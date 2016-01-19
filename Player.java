@@ -35,5 +35,9 @@ public class Player {
 	public void getInfo(){
 		System.out.println(getName()+" con "+getPoints()+" punti.\n");
 	}
+	
+	public Player clone(){
+		return this;
+	}
 
 }

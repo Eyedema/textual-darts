@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
@@ -45,15 +46,18 @@ public class Game extends GameTurn {
 		// .forEach(e -> e.getInfo());
 
 		// Sorting
-		Collections.sort(giocatori, new Comparator<Player>() {
+		ArrayList<Player> sortable = new ArrayList<Player>(giocatori.size());
+		for(Player item: giocatori) sortable.add(item.clone());
+		
+		Collections.sort(sortable, new Comparator<Player>() {
 			@Override
 			public int compare(Player p1, Player p2) {
 
 				return Integer.compare(p1.getPoints(), p2.getPoints());
 			}
 		});
-		for (int i = 0; i < giocatori.size(); i++) {
-			giocatori.get(i).getInfo();
+		for (int i = 0; i < sortable.size(); i++) {
+			sortable.get(i).getInfo();
 		}
 
 		System.out.println("%*%*%*%*%*%*%*%*%*%*%*%*%*%*%*%*");
