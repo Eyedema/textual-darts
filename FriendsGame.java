@@ -10,6 +10,9 @@ public class FriendsGame extends GameTurn {
 	private List<String> parameters;
 
 	public FriendsGame(List<String> s) {
+		if (!s.contains("-r") || !s.contains("-u") || !s.contains("-fr") || !s.contains("-fe") || !s.contains("-a")) {
+			Game g = new Game();
+		}
 		art.draw("DARTS");
 		parameters = s;
 		inserisciNumGiocatori();
