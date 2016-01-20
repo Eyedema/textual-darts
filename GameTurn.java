@@ -3,7 +3,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
-public class GameTurn {
+public abstract class GameTurn {
 	
 	protected int numGioc;
 	protected int puntiTotali;
